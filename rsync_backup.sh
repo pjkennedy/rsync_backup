@@ -2,8 +2,8 @@ HOME="/home/joe"
 
 # run this script from $HOME/joe/sh
 
-# make unequal to skip staging of data
-if [ "true" = "true" ]; then
+# make unequal to skill formatting drive
+if [ "true" = "xtrue" ]; then
 
   # reminder: probably run like this script like this: 
   # nice -n 15 ./rsync_backup.sh
@@ -24,18 +24,17 @@ if [ "true" = "true" ]; then
 
 fi
 
-
+#make unequal to skip pre-staging of data
 if [ "true" = "true" ]; then
-
 
  ############################
  # cp data to staging areas #
  ############################
 
-# Pre-staging selected data 
+# Pre-staging selected data
 # moving data to stuff1 (mostly text) and stuff2 (mostly binary)
 # never delete stuff1 and stuff2; they are the permanent data sources;
-# just added stuff outside them
+# just added stuff outside them to include in the backup.
 # 
 # modify as needed
  echo 'Downloads'
@@ -51,21 +50,22 @@ if [ "true" = "true" ]; then
 
 fi
 
-# if you already prestaged, then you can just to the latter part sometimes
+# backup data
 if [ "true" = "true" ]; then
  ####cd $HOME
 
  #***********************************
- # Copy staged data to remote media
+ # Copy data to remote media
  #***********************************
 
 
  rsync -azP $HOME/stuff1 /media/joe_aux
  rsync -azP $HOME/stuff2 /media/joe_aux
 
-
+# save how many files were backed up
  touch /media/joe_aux/done.txt
  cd /media/joe_aux
  find . | wc -l >> done.txt
  cat done.txt
 fi
+
